@@ -4,6 +4,7 @@ class RecipeService {
   async getRecipes(ingredients) {
     const apiKey = process.env.API_KEY;
     try {
+      console.log(ingredients);
       const response = await axios.post(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
         {
@@ -11,7 +12,7 @@ class RecipeService {
             {
               parts: [
                 {
-                  text: `Предложи 3 блюда, которые можно приготовить из: ${ingredients.join(
+                  text: `Предложи блюда, которые можно приготовить из: ${ingredients.join(
                     ", "
                   )}.`,
                 },
@@ -27,12 +28,10 @@ class RecipeService {
         }
       );
       console.log("Ответ от API:", response.data);
-      const answer =
-        response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Нет ответа";
+      const answer = response.data;
       return answer;
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message, { message: "Ошибка при запросе к ИИ" });
     }
   }
 }

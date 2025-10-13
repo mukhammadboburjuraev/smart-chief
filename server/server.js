@@ -15,15 +15,16 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is running...");
 });
 
+// Routes
 app.use("/api/recipes", recipeRoute);
 
 const startApp = async () => {
   try {
     app.listen(PORT, () => {
-      console.log(`Сервер запущен на порту ${PORT}`);
+      console.log(`Server is started in port ${PORT}`);
     });
   } catch (error) {
-    console.error("Ошибка при запуске сервера:", error);
+    console.error("Server error ", error);
   }
 };
 
