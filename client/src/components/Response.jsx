@@ -4,9 +4,7 @@ import React from "react";
 function Response({ recipes }) {
   return (
     <>
-      <Box width="80%">
-        <p>{recipes}</p>
-      </Box>
+      <Box width="80%">{recipes ? <p>{recipes}</p> : <p>Welcome</p>}</Box>
     </>
   );
 }
